@@ -1,0 +1,34 @@
+Company,Product,TypeName,Inches,CPU_Type,RAM (GB),OpSys,Weight (kg),Price (Euro)
+Acer,Swift 3,Ultrabook,14,Core i5,8,Windows 10,2,770
+Acer,Aspire 3,Notebook,16,Core i3,4,Linux,2,367
+Acer,Aspire A515-51G,Notebook,16,Core i5,4,Windows 10,2,682
+Acer,Aspire A515-51G,Notebook,16,Core i7,8,Windows 10,2,841
+Acer,Aspire 3,Notebook,16,Core i3,4,Windows 10,2,384
+Acer,Aspire E5-475,Notebook,14,Core i3,8,Windows 10,2,389
+Acer,Aspire A515-51G-32MX,Notebook,16,Core i3,4,Windows 10,2,530
+Asus,ZenBook UX430UN,Ultrabook,14,Core i7,16,Windows 10,1,"1,495"
+Asus,Vivobook E200HA,Netbook,12,Atom,2,Windows 10,1,192
+Asus,X540UA-DM186,Notebook,16,Core i3,4,Linux,2,389
+Asus,X542UQ-GO005,Notebook,16,Core i5,8,Linux,2,523
+Asus,X751NV-TY001T,Notebook,17,Pentim,4,Windows 10,3,466
+Asus,VivoBook Max,Notebook,16,Core i5,4,Windows 10,2,586
+Dell,Inspiron 3567,Notebook,16,Core i3,4,Windows 10,2,499
+Dell,Inspiron 3567,Notebook,16,Core i7,8,Windows 10,2,745
+Dell,XPS 13,Ultrabook,13,Core i5,8,Windows 10,1,979
+Dell,Inspiron 5379,2 in 1 Convertible,13,Core i5,8,Windows 10,2,819
+Dell,Inspiron 3567,Notebook,16,Core i3,4,Windows 10,2,419
+Dell,Inspiron 5570,Notebook,16,Core i5,8,Windows 10,2,800
+Dell,Latitude 5590,Ultrabook,16,Core i7,8,Windows 10,2,"1,298"
+Dell,XPS 13,Ultrabook,13,Core i7,16,Windows 10,1,"1,869"
+HP,250 G6,Notebook,16,Core i5,8,No OS,2,575
+HP,250 G6,Notebook,16,Core i5,4,No OS,2,394
+HP,250 G6,Notebook,16,Core i3,4,No OS,2,345
+HP,15-BS101nv,Ultrabook,16,Core i7,8,Windows 10,2,659
+HP,ProBook 470,Notebook,17,Core i5,8,Windows 10,3,896
+HP,250 G6,Notebook,16,Core i5,4,Windows 10,2,489
+Lenovo,IdeaPad 320-15IKB,Notebook,16,Core i3,8,No OS,2,499
+Lenovo,Legion Y520-15IKBN,Gaming,16,Core i5,8,Windows 10,3,999
+Lenovo,IdeaPad 320-15ISK,Notebook,16,Core i3,4,No OS,2,369
+Lenovo,IdeaPad 520S-14IKB,Notebook,14,Core i3,8,No OS,2,599
+Lenovo,V310-15ISK,Notebook,16,Core i5,4,Windows 10,2,549
+Lenovo,IdeaPad 320-15IKBN,Notebook,16,Core i5,8,No OS,2,519
