@@ -1,0 +1,6 @@
+
+A)	The other variable to do with win percentace in the winpercent feature. The reason we didn't use this to make a stacked bar chart is that winpercent is a continuous variable that would have made the bar chart harder to understand and it would have a hundred colors to cover the scale of 0-100. Where as the wincat feature is nominal and only has 4 different values, making it easy to color code and represent on the graph.
+
+
+
+B)	Based on my visualization, candy that is neither chocolate nor fruity tended to be a much less frequent winner, with chocolate being the most frequent. The neither category seems to be much more of a niche group of candy, as all the answers were never often, point to me that it is probably a candy that is seasonal or nostalgic that people consume for those reasons. Unsurprisingly people tend to like chocolate the most out of all candies.

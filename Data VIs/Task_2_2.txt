@@ -1,0 +1,7 @@
+What are the noticeable differences in the winning percent and price percent distributions 
+between chocolate and non-chocolate candy? Describe the trends you see in detail based on 
+your visualization. 
+
+
+
+Based on my visualizations it seems to me that chocolate candy seems to be more expensive on average then non chocolate candy, and we can also see that the Non-Chocolate win percentage is grouped around the 40% point where the Chocolate win-percentage is grouped around the 60% point. Meaning that Chocolate candy tends to win more often then non-chocolate candy does at a roughly 60-40 rate.
