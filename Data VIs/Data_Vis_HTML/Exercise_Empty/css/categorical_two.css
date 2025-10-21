@@ -1,0 +1,37 @@
+html {
+    background-color: whitesmoke;
+    margin: 2em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 100%
+}
+
+h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    color: darkblue;
+}
+
+
+section {
+    margin: 2em;
+}
+
+/* classes */
+
+.scalesvg {
+           width: 80%;
+           display: block;
+           height: auto;
+           margin-left: auto;
+           margin-right: auto;
+}
+
+/* specific divs */
+
+/* use rem for units, that means the size is relative to the root of the file
+    em is relative to the parent element, try not to use that */
