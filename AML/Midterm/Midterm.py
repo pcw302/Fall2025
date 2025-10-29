@@ -46,20 +46,14 @@ Understanding the type and nature of RL to be used:
 import gymnasium as gym
 import numpy as np
 
-# Create the CartPole environment
 env = gym.make("CartPole-v1")
 obs, info = env.reset(seed=42)
 
-# Define the basic, hard-coded policy
 def basic_policy(obs):
-    """
-    A simple policy that pushes the cart left if the pole is leaning left,
-    and right if the pole is leaning right.
-    """
     angle = obs[2]
     return 0 if angle < 0 else 1
 
-# --- Simulation Loop ---
+#Code taken Directly from given notebook
 def basic_policy(obs):
     angle = obs[2]
     return 0 if angle < 0 else 1
@@ -76,17 +70,13 @@ for episode in range(500):
             break
 
     totals.append(episode_rewards)
-# --- Calculate and Print Results ---
-print("--- Results for Basic Policy ---")
+print("--- Basic Policy ---")
 print(f"Mean total rewards over 500 episodes: {np.mean(totals)}")
 print(f"Standard deviation: {np.std(totals)}")
 print(f"Minimum rewards in an episode: {np.min(totals)}")
 print(f"Maximum rewards in an episode: {np.max(totals)}")
 
 #With the basic policy, we get a Maximum Reward of 63 and a minimum of 22, My changes (Documented below)
-
-
-
 
 def my_policy(obs):
     """
@@ -115,8 +105,7 @@ for episode in range(500):
             break
 
     totals.append(episode_rewards)
-# --- Calculate and Print Results ---
-print("--- Results for My Policy ---")
+print("--- My Policy ---")
 print(f"Mean total rewards over 500 episodes: {np.mean(totals)}")
 print(f"Standard deviation: {np.std(totals)}")
 print(f"Minimum rewards in an episode: {np.min(totals)}")
