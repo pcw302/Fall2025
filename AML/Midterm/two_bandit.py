@@ -4,7 +4,7 @@ import numpy as np
 # First we will test the greedy policy, then we will implement an epsilon-greedy policy to see if it performs better.
 class TwoArmedBandit:
     def __init__(self, epsilon: float = 0.1, episodes: int = 5000):
-        """ ---Initializes the Two-Armed Bandit--- \n
+        """ 
         inputs:
             epsilon: float, probability of exploration for epsilon-greedy policy
             episodes: int, number of times to pull an arm
@@ -26,7 +26,7 @@ class TwoArmedBandit:
 
 
     def pull_arm(self, arm: int) -> 0 | 1:
-        """ ---Simulates the pulling of an arm--- \n
+        """ 
         inputs:
             arm: float, probability of payout for the selected arm
         outputs:
@@ -40,13 +40,13 @@ class TwoArmedBandit:
                 return 1 if np.random.rand() < self.true_arm_two else 0 #Bad arm
 
     def greedy_policy(self) -> 0 | 1:
-        """ ---Greedy Policy--- \n
+        """
         Will always choose the arm with the highest average reward so far.
         """
         return np.argmax(self.average_rewards_greedy) #Will either return 0 for arm 1 of 1 for arm 2
 
     def epsilon_greedy_policy(self, epsilon=0.1) -> 0 | 1:
-        """ ---Epsilon-Greedy Policy--- \n
+        """ 
         With probability epsilon, will choose a random arm.
         With probability 1-epsilon, will choose the arm with the highest average reward so far.
         """
@@ -57,7 +57,7 @@ class TwoArmedBandit:
         
 
     def run_simulation(self, printing: bool = False) -> None:
-            """ ---Runs the simulation for both policies--- \n
+            """ 
             inputs:
                 episodes: int, number of times to pull an arm
             outputs:
@@ -103,7 +103,7 @@ class TwoArmedBandit:
                 print(f"Average rewards: {self.average_rewards_epsilon}")
                 
     def run_batch_simulation(self, batches: int = 100, printing: bool = False) -> None:
-        """ ---Runs multiple simulations and averages the results--- \n
+        """
         inputs:
             batches: int, number of simulations to run
         outputs:
@@ -133,7 +133,7 @@ class TwoArmedBandit:
 
 
     def reset(self) -> None:
-        """ ---Resets the bandit to initial state--- \n
+        """ 
         inputs:
             None
         outputs:
@@ -147,8 +147,8 @@ class TwoArmedBandit:
         self.average_rewards_epsilon = [0.0, 0.0]
         
         
-    def optimize_epsilon(self, epsilon_values: list[float], plot: bool = True, inplace: bool = False) -> float:
-        """ ---Finds the best epsilon value from a list and plots the results--- \n
+    def optimize_epsilon(self, filepath: str, epsilon_values: list[float], plot: bool = True, inplace: bool = False) -> float:
+        """ 
         inputs:
             epsilon_values: list of float, epsilon values to test
             plot: bool, whether to plot the results. True by default.
@@ -163,10 +163,10 @@ class TwoArmedBandit:
         for epsilon in epsilon_values:
             self.epsilon = epsilon
             self.reset()
-            # Run a simulation without printing results
+            
             self.run_simulation(printing=False) 
             
-            # Calculate total rewards for this epsilon
+            
             total_rewards = sum(self.reward_history_epsilon[0]) + sum(self.reward_history_epsilon[1])
             average_reward = total_rewards / self.episodes
             average_rewards_per_epsilon.append(average_reward)
@@ -176,9 +176,12 @@ class TwoArmedBandit:
                 best_epsilon = epsilon
         self.__known_best_epsilon = best_epsilon  # Store for plot
         if plot:
-            self._plot_epsilon_optimization(epsilon_values, average_rewards_per_epsilon)
+            self._plot_epsilon_optimization( filepath, epsilon_values, average_rewards_per_epsilon)
         if inplace:
             self.epsilon = best_epsilon
+            
+        
+        
 
         print(f"Best epsilon found: {best_epsilon:.3f} with an average reward of {best_average_reward:.3f}")
         return best_epsilon
@@ -217,40 +220,48 @@ class TwoArmedBandit:
             return temp_reward_history
 
 
-    def plot_results(self) -> None:
+    def plot_results(self,filepath: str, runs: int = 200) -> None:
         """
-        Runs multiple simulations for each policy and plots the average reward per step over time.
-        inputs:
-            runs: int, The number of independent simulations to average over.
         outputs:
             None, displays a plot comparing the learning curves of the two policies.
         """
         import matplotlib.pyplot as plt
 
         # Arrays to store the reward at each step for every run
-        temp_greedy_rewards = np.zeros((self.episodes, self.episodes))
-        temp_epsilon_rewards = np.zeros((self.episodes, self.episodes))
+        temp_greedy_rewards = np.zeros((runs, self.episodes))
+        temp_epsilon_rewards = np.zeros((runs, self.episodes))
 
-        for i in range(self.episodes):
+        for i in range(runs):
             temp_greedy_rewards[i, :] = self._run_single_simulation('greedy')
             temp_epsilon_rewards[i, :] = self._run_single_simulation('epsilon')
 
         mean_greedy_rewards = np.mean(temp_greedy_rewards, axis=0)
         mean_epsilon_rewards = np.mean(temp_epsilon_rewards, axis=0)
+        
+        # Calculate the cumulative average reward over time for a smoother learning curve
+        cumulative_avg_greedy = np.cumsum(mean_greedy_rewards) / (np.arange(self.episodes) + 1)
+        cumulative_avg_epsilon = np.cumsum(mean_epsilon_rewards) / (np.arange(self.episodes) + 1)
+
 
         plt.figure(figsize=(12, 8))
-        plt.title("Policy Performance Comparison over Time")
-        plt.plot(np.arange(self.episodes), mean_greedy_rewards, label="Greedy Policy")
-        plt.plot(np.arange(self.episodes), mean_epsilon_rewards, label=f"Epsilon-Greedy Policy (ε={self.epsilon})")
+        plt.title(f"Policy Performance Comparison (Averaged over {runs} runs)")
+        plt.plot(np.arange(self.episodes), cumulative_avg_greedy, label="Greedy Policy")
+        plt.plot(np.arange(self.episodes), cumulative_avg_epsilon, label=f"Epsilon-Greedy Policy (ε={self.epsilon})")
         plt.xlabel("Episodes (Arm Pulls)")
         plt.ylabel("Average Reward")
         plt.legend()
         plt.grid(True)
+        
+        if filepath:
+            plt.savefig(filepath, bbox_inches='tight', facecolor='white')
+        
         plt.show()
         
         
-    def _plot_epsilon_optimization(self, epsilon_values: list[float], average_rewards: list[float]) -> None:
-        """ ---Helper, Use optimize_epsilon(plot = True)--- \n
+        
+        
+    def _plot_epsilon_optimization(self, filepath: str, epsilon_values: list[float], average_rewards: list[float]) -> None:
+        """ 
         inputs:
             epsilon_values: list of float, epsilon values tested
             average_rewards: list of float, corresponding average rewards
@@ -275,10 +286,13 @@ class TwoArmedBandit:
         plt.xlabel('Epsilon Values')
         plt.ylabel('Average Rewards')
         plt.grid()
+        if filepath:
+            plt.savefig(filepath, bbox_inches='tight', facecolor='white')
         plt.show()
+        
 
     def change_epsilon(self, new_epsilon: float) -> None:
-        """ ---Changes the epsilon value--- \n
+        """ 
         inputs:
             new_epsilon: float, new epsilon value
         outputs:
@@ -290,7 +304,22 @@ class TwoArmedBandit:
             raise ValueError("Epsilon must be between 0 and 1.")
 
 test = TwoArmedBandit(epsilon=0.01, episodes=5000)
-#test.run_simulation()
-#test.run_batch_simulation(batches=100)
-#test.optimize_epsilon(epsilon_values=np.linspace(0.01, 0.9, 1000).tolist(), plot=False, inplace=True)
-test.plot_results()
+test.plot_results(filepath='policy_comparison.png', runs=200)
+test.optimize_epsilon(filepath='epsilon_optimization.png', epsilon_values=np.linspace(0.01, 0.9, 100).tolist(), plot=True, inplace=True)
+
+
+"""
+My results show that once an optimal epsilon value is found, it will always outperfom the greedy policy given enough episodes.
+By looking at my epsilon optimization plot, I found that an epsilon value of around 0.08-0.1 gives the highest average reward. Which makes sense as the arms are so 
+imbalanced that once the better arm is found, it should alwayus be chosen. So a lower epsilon value is optimal in this case. Which is reflected in the results plot as well.
+And when we compare the two policies, we see that the epsilon greedy policy always outperfoms. The only way this could change is the greedy policy only chose 
+randomly on its very first pull and happened to choose the better arm. In which case it would have an average reward of 1, becuase it will only every choose the better arm after that.
+However in this simulation over a long enough time, the epsilon greedy policy will always outperfom the greedy policy becuase it is unlikely to choose the right arm every time.
+
+
+Note: I definilty over engineered this solutiopn, but I found it kind of enjoyable to do so. I believe that gymnasium library seen in the midtern notebook
+has a built in narmed bandit library, but I thought it would be good practice to impliment my own. A lot of the plot code is inspired or taken by
+my 301 class Data Visulatization notes. The rest of it is my ideas and implimentation with some help from AI to refactor so the simulations didnt take 10 minutes to run (Accidently had a 0n^2 for loop that was running 50,000,000 iterations).
+
+"""
+    
