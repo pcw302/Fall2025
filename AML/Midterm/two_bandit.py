@@ -323,3 +323,14 @@ my 301 class Data Visulatization notes. The rest of it is my ideas and impliment
 
 """
     
+
+TwoArmedBandit.epsilon_greedy_policy
+TwoArmedBandit.greedy_policy
+TwoArmedBandit.run_batch_simulation
+TwoArmedBandit.plot_results
+TwoArmedBandit.optimize_epsilon
+TwoArmedBandit.reset
+TwoArmedBandit.pull_arm
+TwoArmedBandit._plot_epsilon_optimization
+TwoArmedBandit._run_single_simulation
+TwoArmedBandit.run_simulation
